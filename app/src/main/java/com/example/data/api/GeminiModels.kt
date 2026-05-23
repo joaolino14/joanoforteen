@@ -1,0 +1,52 @@
+package com.example.data.api
+
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class GenerateContentRequest(
+    val contents: List<Content>,
+    val generationConfig: GenerationConfig? = null,
+    val systemInstruction: Content? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class Content(
+    val parts: List<Part>
+)
+
+@JsonClass(generateAdapter = true)
+data class Part(
+    val text: String? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class GenerationConfig(
+    val responseMimeType: String? = null,
+    val temperature: Float? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class GenerateContentResponse(
+    val candidates: List<Candidate>? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class Candidate(
+    val content: Content? = null
+)
+
+// Helper structures for structured JSON outputs
+@JsonClass(generateAdapter = true)
+data class AtsScoreResult(
+    val score: Int = 70,
+    val keywordsMatch: Int = 65,
+    val grammarCheck: Int = 80,
+    val strongKeywords: List<String> = emptyList(),
+    val missingKeywords: List<String> = emptyList(),
+    val directRecommendations: List<String> = emptyList()
+)
+
+@JsonClass(generateAdapter = true)
+data class SkillSuggestionsResult(
+    val suggestions: List<String> = emptyList()
+)
